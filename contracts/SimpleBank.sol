@@ -121,3 +121,4 @@ contract SimpleBank {
            return balances[msg.sender];     //show current customer balance after withdrawAmount deduction.
     }
 }
+
