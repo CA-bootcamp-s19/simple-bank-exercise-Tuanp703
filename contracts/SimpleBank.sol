@@ -33,19 +33,19 @@ contract SimpleBank {
     
     /* Add an argument for this event, an accountAddress */
     event LogEnrolled(
-        address accountEnrolled
+        address accountAddress
     );
 
     /* Add 2 arguments for this event, an accountAddress and an amount */
     event LogDepositMade(
-        address accountDeposit,
-        uint accountAmount
+        address accountAddress,
+        uint amount
     );
 
     /* Create an event called LogWithdrawal */
     /* Add 3 arguments for this event, an accountAddress, withdrawAmount and a newBalance */
     event LogWithdrawal(
-        address accountWithdrawal,
+        address accountAddress,
         uint withdrawAmount,
         uint newBalance
     );
@@ -114,7 +114,7 @@ contract SimpleBank {
            to the user attempting to withdraw. 
            return the user's balance.*/
            //  require(enrolled[msg.sender] == true);       //require customer to be enrolled as bank customer
-           assert(balances[msg.sender] >= withdrawAmount);      //the customer balance must be at least the withdrawAmount - use assert b/c all gases are consumed.
+           require(balances[msg.sender] >= withdrawAmount);      //the customer balance must be at least the withdrawAmount - use assert b/c all gases are consumed.
            balances[msg.sender] -= withdrawAmount;      //reduce customer balance by withdrawAmount
            address(msg.sender).transfer(withdrawAmount);    //transfer withdrawAmount
            emit LogWithdrawal(msg.sender, withdrawAmount, balances[msg.sender]);        //emit withdraw details
